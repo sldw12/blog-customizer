@@ -57,7 +57,8 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 		setIsOpen((currentState) => !currentState);
 	};
 
-	const handleOptionChange = <Key extends keyof ArticleStateType>(key: Key) =>
+	const handleOptionChange =
+		<Key extends keyof ArticleStateType>(key: Key) =>
 		(option: ArticleStateType[Key]) => {
 			setFormState((currentState) => ({
 				...currentState,
