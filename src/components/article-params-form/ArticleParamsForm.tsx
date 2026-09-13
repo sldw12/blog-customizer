@@ -24,13 +24,13 @@ type ArticleParamsFormProps = {
 };
 
 export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [formState, setFormState] =
 		useState<ArticleStateType>(defaultArticleState);
 	const formContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (!isOpen) {
+		if (!isSidebarOpen) {
 			return;
 		}
 
@@ -42,7 +42,7 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 				event.target instanceof Node &&
 				!formContainer.contains(event.target)
 			) {
-				setIsOpen(false);
+				setIsSidebarOpen(false);
 			}
 		};
 
@@ -51,10 +51,10 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 		return () => {
 			document.removeEventListener('click', handleOutsideClick, true);
 		};
-	}, [isOpen]);
+	}, [isSidebarOpen]);
 
 	const handleArrowClick = () => {
-		setIsOpen((currentState) => !currentState);
+		setIsSidebarOpen((currentState) => !currentState);
 	};
 
 	const handleOptionChange =
@@ -78,10 +78,10 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 
 	return (
 		<div ref={formContainerRef}>
-			<ArrowButton isOpen={isOpen} onClick={handleArrowClick} />
+			<ArrowButton isOpen={isSidebarOpen} onClick={handleArrowClick} />
 			<aside
 				className={clsx(styles.container, {
-					[styles.container_open]: isOpen,
+					[styles.container_open]: isSidebarOpen,
 				})}>
 				<form
 					className={styles.form}
